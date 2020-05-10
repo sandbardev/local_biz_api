@@ -7,7 +7,7 @@
   },
   "servers": [
       {
-          "url": "http://localhost:3333",
+          "url": "http://localhost:5000",
           "description": "HTTP (local)"
       }
   ],
@@ -16,5 +16,63 @@
       "name": "User",
       "description": "Requests feitas pelos usuários"
     }
-  ]
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Register user",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "surname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": "Campo obrigatório: ${campo}"
+                }
+              }
+            }
+          },
+
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": "Email já cadastrado!"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

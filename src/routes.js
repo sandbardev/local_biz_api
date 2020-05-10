@@ -12,4 +12,5 @@ router.get('/', async function (req, res) {
 })
 
 router.post('/register', UserController.create)
+
 export default router

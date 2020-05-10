@@ -15,12 +15,16 @@
     {
       "name": "User",
       "description": "Requests feitas pelos usuários"
+    },
+    {
+      "name": "Registration",
+      "description": "New user registration form"
     }
   ],
   "paths": {
     "/register": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Registration"],
         "summary": "Register user",
         "description": "",
         "requestBody": {
@@ -49,27 +53,73 @@
           "201": {
             "description": "Created"
           },
-
           "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": "Campo obrigatório: ${campo}"
-                }
-              }
-            }
+            "description": "Bad request"
           },
-
           "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": "Email já cadastrado!"
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Initiate session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/:id": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Details user",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Not your own profile"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete own account",
+        "description": "",
+        "responses": {
+          "204": {
+            "description": "No content"
+          }, 
+          "403": {
+            "description": "Not your own profile"
+          },
+          "404": {
+            "description": "User not found"
           }
         }
       }

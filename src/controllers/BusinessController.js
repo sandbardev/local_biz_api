@@ -22,6 +22,7 @@ const create = async (req, res) => {
     cep: cep,
     state: data.state,
     city: data.city,
+    neighborhood: data.neighborhood,
     street: data.street,
     number: number,
 
@@ -42,4 +43,14 @@ const getByUser = async (req, res) => {
   return res.status(200).json(businesses)
 }
 
-export { create, getByUser }
+const getByNeighborhood = async (req, res) => {
+  let { city, neighborhood } = req.params
+
+  let businesses = await connection('businesses')
+  .where('city', city)
+  .andWhere('neighborhood', neighborhood)
+  .select('*')
+  return res.json({city, neighborhood, businesses})
+}
+
+export { create, getByUser, getByNeighborhood }

@@ -13,12 +13,16 @@
   ],
   "tags":[
     {
-      "name": "User",
-      "description": "Requests feitas pelos usuários"
-    },
-    {
       "name": "Registration",
       "description": "New user registration form"
+    },
+    {
+      "name": "Free",
+      "description": "Available for non-registered users"
+    },
+    {
+      "name": "User",
+      "description": "Requests feitas pelos usuários"
     }
   ],
   "paths": {
@@ -222,6 +226,45 @@
           },
           "403": {
             "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/:city/:neighborhood/": {
+      "get": {
+        "tags": ["Free"],
+        "summary": "View businesses in specified region",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city",
+            "description": "The city, as registered in the database",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "neighborhood",
+            "description": "The neighborhood, as registered in the database",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/business"
+                }
+              }
+            }
           }
         }
       }

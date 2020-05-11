@@ -22,6 +22,7 @@ router.delete('/users/:id', checkUserAuth, UserController.destroy)
 
 router.post('/business/new', checkUserAuth, BusinessController.create)
 router.get('/users/:id/businesses', checkUserAuth, BusinessController.getByUser)
+router.get('/:city/:neighborhood', BusinessController.getByNeighborhood)
 router.post('/login', LoginController.authorizeUser)
 
 export default router

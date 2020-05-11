@@ -8,6 +8,7 @@ exports.up = function(knex) {
     table.string('cep').notNullable
     table.string('state').notNullable
     table.string('city').notNullable
+    table.string('neighborhood').notNullable
     table.string('street').notNullable
     table.string('number')
 

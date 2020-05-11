@@ -230,6 +230,67 @@
         }
       }
     },
+    "/cities": {
+      "get": {
+        "tags": ["Free"],
+        "summary": "List available cities",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "city": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/:city/neighborhoods": {
+      "get": {
+        "tags": ["Free"],
+        "summary": "List available cities",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city",
+            "required": true,
+            "description": "City name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "city": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
     "/:city/:neighborhood/": {
       "get": {
         "tags": ["Free"],
@@ -265,6 +326,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       }

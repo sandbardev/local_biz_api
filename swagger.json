@@ -17,12 +17,16 @@
       "description": "New user registration form"
     },
     {
+      "name": "Login",
+      "description": ""
+    },
+    {
       "name": "Free",
       "description": "Available for non-registered users"
     },
     {
       "name": "User",
-      "description": "Requests feitas pelos usuários"
+      "description": "Requests feitas pelos usuários logados"
     }
   ],
   "paths": {
@@ -68,7 +72,7 @@
     },
     "/login": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Login"],
         "summary": "Initiate session",
         "description": "",
         "requestBody": {
@@ -180,7 +184,7 @@
         }
       }
     },
-    "/business/new": {
+    "/users/:id/businesses/new": {
       "post": {
         "tags": ["User"],
         "summary": "Register business",

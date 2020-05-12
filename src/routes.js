@@ -3,34 +3,29 @@ import * as UserController from './controllers/UserController'
 import * as LoginController from './controllers/LoginController'
 import * as BusinessController from './controllers/BusinessController'
 import * as LocaleController from './controllers/LocaleController'
-
-import checkUserAuth from './middlewares/checkUserAuth'
-
 import * as swaggerDocument from '../swagger.json'
 import * as swaggerUi from 'swagger-ui-express'
+import checkUserAuth from './middlewares/checkUserAuth'
 
 const router = Router()
-
-router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 router.get('/', async function (req, res) {
     return res.status(200).json("HOME")
 })
 
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
 router.post('/register', UserController.create)
+router.post('/login', LoginController.authorizeUser)
+
 router.get('/users/:id', checkUserAuth, UserController.view)
 router.delete('/users/:id', checkUserAuth, UserController.destroy)
-
-router.post('/business/new', checkUserAuth, BusinessController.create)
-
 router.get('/users/:id/businesses', checkUserAuth, BusinessController.getByUser)
-router.get('/:city/neighborhoods', LocaleController.getNeighborhoods)
-
-router.get('/:city/:neighborhood', BusinessController.getByNeighborhood)
-router.get('/:city/:neighborhood/:id', BusinessController.view)
+router.post('/users/:id/businesses/new', checkUserAuth, BusinessController.create)
 
 router.get('/cities', LocaleController.getCities)
-
-router.post('/login', LoginController.authorizeUser)
+router.get('/:city/neighborhoods', LocaleController.getNeighborhoods)
+router.get('/:city/:neighborhood', BusinessController.getByNeighborhood)
+router.get('/:city/:neighborhood/:id', BusinessController.view)
 
 export default router

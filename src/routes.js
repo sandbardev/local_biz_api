@@ -27,6 +27,7 @@ router.get('/users/:id/businesses', checkUserAuth, BusinessController.getByUser)
 router.get('/:city/neighborhoods', LocaleController.getNeighborhoods)
 
 router.get('/:city/:neighborhood', BusinessController.getByNeighborhood)
+router.get('/:city/:neighborhood/:id', BusinessController.view)
 
 router.get('/cities', LocaleController.getCities)
 

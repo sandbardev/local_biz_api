@@ -33,6 +33,17 @@ const create = async (req, res) => {
   return res.status(201).json()
 }
 
+const view = async (req, res) => {
+  let { id } = req.params
+  let business = await connection('businesses').where('id', id).select('*').first()
+
+  if (!business){
+    return res.status(404).json({message: "Business ID not found."})
+  }
+  
+  return res.status(200).json(business)
+}
+
 const getByUser = async (req, res) => {
   let user = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
 
@@ -53,4 +64,4 @@ const getByNeighborhood = async (req, res) => {
   return res.json({city, neighborhood, businesses})
 }
 
-export { create, getByUser, getByNeighborhood }
+export { create, view, getByUser, getByNeighborhood }

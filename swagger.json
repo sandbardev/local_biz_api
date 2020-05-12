@@ -332,6 +332,57 @@
           }
         }
       }
+    },
+    "/:city/:neighborhood/:id": {
+      "get": {
+        "tags": ["Free"],
+        "summary": "View businesses in specified region",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city",
+            "description": "The city, as registered in the database",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "neighborhood",
+            "description": "The neighborhood, as registered in the database",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Business ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/business"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
     }
   },
   "components": {
